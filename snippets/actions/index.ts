@@ -2,6 +2,7 @@
 
 import { db } from "@/db";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 export async function editSnippet(id: number, code: string) {
   console.log(id, code);
@@ -10,6 +11,7 @@ export async function editSnippet(id: number, code: string) {
     data: { code }
   });
 
+  revalidatePath(`/snippet/${id}`);
   redirect(`/snippet/${id}`);
 }
 
@@ -18,6 +20,7 @@ export async function deleteSnippet(id: number) {
     where: { id }
   });
 
+  revalidatePath("/");
   redirect("/");
 }
 
@@ -39,7 +42,7 @@ export async function createSnippet(
     }
 
     // Create new record in the database
-    const snippet = await db.snippet.create({
+    await db.snippet.create({
       data: {
         title,
         code
@@ -53,7 +56,7 @@ export async function createSnippet(
     }
   }
 
-
+  revalidatePath("/");
   // Redirect user back to the root route
   redirect("/");
 }
