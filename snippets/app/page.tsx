@@ -1,0 +1,30 @@
+import Link from "next/link";
+import { db } from "@/db";
+
+export default async function Home() {
+  const snippets = await db.snippet.findMany();
+
+  const renderedSnippets = snippets.map((snippet) => {
+    return (
+      <Link
+        key={snippet.id}
+        href={`/snippet/${snippet.id}`}
+        className={"flex justify-between items-center p-2 border rounded"}
+      >
+        {snippet.title}
+        <div>View</div>
+      </Link>);
+  });
+
+  return (
+    <div>
+      <div className={"flex justify-between items-center m-2"}>
+        <h1 className={"text-xl font-bold"}>Snippets</h1>
+        <Link href={"/snippet/new"} className={"border p-2 rounded"}>
+          New
+        </Link>
+      </div>
+      <div className={"flex flex-col gap-2"}>{renderedSnippets}</div>
+    </div>
+  );
+}
