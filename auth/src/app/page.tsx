@@ -1,7 +1,7 @@
 import { Button } from "@heroui/react";
 import * as actions from "@/actions";
-import { auth } from "@/auth/auth";
-import Profie from "@/app/components/profile";
+import { auth } from "@/auth";
+import Profie from "@/components/profile";
 
 export default async function Home() {
   const session = await auth();
