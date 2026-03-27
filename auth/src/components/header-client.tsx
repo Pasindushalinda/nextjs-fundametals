@@ -7,7 +7,6 @@ import {
   NavbarContent,
   NavbarItem,
   Button,
-  Avatar,
 } from "@nextui-org/react";
 
 interface HeaderClientProps {
@@ -23,7 +22,9 @@ export default function HeaderClient({ user }: HeaderClientProps) {
   if (user) {
     authContent = (
       <NavbarItem>
-        <Avatar src={user.image || ""} />
+        <div className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-blue-500">
+          <img src={user.image || ""} alt="avatar" className="w-full h-full object-cover" />
+        </div>
       </NavbarItem>
     );
   } else {
