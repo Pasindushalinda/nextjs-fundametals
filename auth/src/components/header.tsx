@@ -1,18 +1,19 @@
-import { auth } from "@/auth";
-import HeaderAuth from "./header-auth";
-import Link from "next/link";
+'use client';
 
-export default async function Header() {
+import Link from 'next/link';
+import { Input } from '@heroui/react';
+import HeaderAuth from '@/components/header-auth';
+
+export default function Header() {
   return (
     <nav className="shadow mb-6 flex items-center justify-between px-4 h-16 bg-white">
       <Link href="/" className="font-bold text-lg">
         Discuss
       </Link>
-      <input
-        className="border rounded px-3 py-1 text-sm"
-        placeholder="Search..."
-      />
-      <HeaderAuth />
+      <Input placeholder="Search..." className="max-w-xs" />
+      <div className="flex items-center gap-2">
+        <HeaderAuth />
+      </div>
     </nav>
   );
 }
