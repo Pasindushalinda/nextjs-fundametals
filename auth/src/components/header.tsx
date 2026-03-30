@@ -1,8 +1,18 @@
 import { auth } from "@/auth";
-import HeaderClient from "./header-client";
+import HeaderAuth from "./header-auth";
+import Link from "next/link";
 
 export default async function Header() {
-  const session = await auth();
-
-  return <HeaderClient user={session?.user ?? null} />;
+  return (
+    <nav className="shadow mb-6 flex items-center justify-between px-4 h-16 bg-white">
+      <Link href="/" className="font-bold text-lg">
+        Discuss
+      </Link>
+      <input
+        className="border rounded px-3 py-1 text-sm"
+        placeholder="Search..."
+      />
+      <HeaderAuth />
+    </nav>
+  );
 }
